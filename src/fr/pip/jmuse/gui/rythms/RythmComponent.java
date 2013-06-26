@@ -24,6 +24,11 @@ import javax.swing.JFrame;
 import fr.pip.jmuse.model.Model;
 import fr.pip.jmuse.model.notes.Rythm;
 
+/**
+ * Component that display a rythm element and allow to select a probability.
+ * @author philippepeter
+ *
+ */
 public class RythmComponent extends JComponent{
 
 	private final static int WIDTH = 50;

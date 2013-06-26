@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -18,31 +19,30 @@ import fr.pip.jmuse.model.notes.Note;
 
 /**
  * A Panel displaying a dynamic piano keyboard in a scrollPane.
+ * 
  * @author philippepeter
- *
+ * 
  */
 public class KeyboardPanel extends JScrollPane {
-
-	public enum KeyboardMode {
-		NORMAL, SELECT_MIN, SELECT_MAX, NOTES_SELECTION;
-	}
 
 	private Vector<Key> keys = new Vector<Key>();
 	private int panelHeight;
 	private int panelWidth;
 	private JPanel panel;
 	private Key selectedKey = null;
-	private KeyboardMode mode = KeyboardMode.NORMAL;
-	private Vector<NoteSelectionListener> listeners = new Vector<NoteSelectionListener>();
 	private boolean dragg;
 
 	public KeyboardPanel(int width, int height, Model model) {
+		// Creates all notes.
 		for (Note note : AllNotes.NOTES) {
 			keys.add(new Key(note, model));
 		}
+
+		// Compute size.
 		this.panelWidth = (keys.size() / 12 + 1) * 7 * Key.WIDTH + 40;
 		this.panelHeight = height + 40;
 
+		// Creates the canvas to draw.
 		panel = new JPanel() {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -50,6 +50,8 @@ public class KeyboardPanel extends JScrollPane {
 				draw((Graphics2D) g);
 			}
 		};
+
+		// Configure the size of canvas and JScrollPane.
 		panel.setSize(panelWidth, panelHeight);
 		panel.setMinimumSize(new Dimension(panelWidth, panelHeight));
 		panel.setPreferredSize(new Dimension(panelWidth, panelHeight));
@@ -59,18 +61,19 @@ public class KeyboardPanel extends JScrollPane {
 		this.setViewportView(panel);
 		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.getHorizontalScrollBar().setValues(500, 1000, 100, 200);
-		panel.addMouseListener(new MouseListener() {
+
+		panel.addMouseListener(new MouseAdapter() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (mode == KeyboardMode.NORMAL && selectedKey != null) {
+				if (selectedKey != null) {
 					selectedKey.setPressed(false);
 					panel.repaint();
 					selectedKey = null;
 				}
+				// Allow note selection even when mouse is a little dragged.
 				if (dragg) {
 					for (Key key : keys) {
 						if (key.contains(e.getPoint())) {
-							fireNoteSelectionEvent(key.getNote());
 							if (e.getButton() == MouseEvent.BUTTON1) {
 								key.levelUp();
 							} else if (e.getButton() == MouseEvent.BUTTON3) {
@@ -88,25 +91,16 @@ public class KeyboardPanel extends JScrollPane {
 			public void mousePressed(MouseEvent e) {
 				for (Key key : keys) {
 					if (key.contains(e.getPoint())) {
-						if (mode == KeyboardMode.NORMAL) {
-							selectedKey = key;
-							key.setPressed(true);
-							panel.repaint();
-						}
+						selectedKey = key;
+						key.setPressed(true);
+						panel.repaint();
 					}
 				}
-			}
-
-			public void mouseExited(MouseEvent e) {
-			}
-
-			public void mouseEntered(MouseEvent e) {
 			}
 
 			public void mouseClicked(MouseEvent e) {
 				for (Key key : keys) {
 					if (key.contains(e.getPoint())) {
-						fireNoteSelectionEvent(key.getNote());
 						if (e.getButton() == MouseEvent.BUTTON1) {
 							key.levelUp();
 						} else if (e.getButton() == MouseEvent.BUTTON3) {
@@ -131,12 +125,6 @@ public class KeyboardPanel extends JScrollPane {
 				dragg = true;
 			}
 		});
-	}
-
-	protected void fireNoteSelectionEvent(Note note) {
-		for (NoteSelectionListener listener : listeners) {
-			listener.noteSelected(note);
-		}
 	}
 
 	public void draw(Graphics2D g) {

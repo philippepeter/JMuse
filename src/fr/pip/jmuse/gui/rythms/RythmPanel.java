@@ -16,7 +16,7 @@ import fr.pip.jmuse.model.Model;
 import fr.pip.jmuse.model.notes.Rythm;
 
 /**
- *
+ * Panel that allows to select rythms and their probabilities.
  * @author philippepeter
  */
 public class RythmPanel extends JPanel {

@@ -1,5 +1,10 @@
 package fr.pip.jmuse.model.notes;
 
+/**
+ * A musical note.
+ * @author philippepeter
+ *
+ */
 public class Note {
 
 	private final static String WHITE_SPACE = " ";

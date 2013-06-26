@@ -1,7 +1,13 @@
 package fr.pip.jmuse.model.notes;
 
+/**
+ * A musical note duration.
+ * @author philippepeter
+ *
+ */
 public enum Rythm {
 
+	//TODO use english terms.
 	NOIRE, CROCHE, DOUBLE_CROCHE;
 
 	public static double getSleepTime(Rythm rythm, double bpm) {

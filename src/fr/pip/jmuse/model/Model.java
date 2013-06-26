@@ -6,7 +6,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import fr.pip.jmuse.model.notes.Note;
 import fr.pip.jmuse.model.notes.Rythm;
 
-
+/**
+ * A Model that contains notes and rythms, each with a probability.
+ * @author philippepeter
+ *
+ */
 public class Model {
 
 	private ConcurrentHashMap<Note, Integer> notes = new ConcurrentHashMap<Note, Integer>();

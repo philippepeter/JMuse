@@ -2,7 +2,12 @@ package fr.pip.jmuse.model.notes;
 
 import java.util.Vector;
 
-public class AllNotes {
+/**
+ * Utility class that contains all notes.
+ * @author philippepeter
+ *
+ */
+public final class AllNotes {
 	public static Vector<String> KEYS = new Vector<String>();
 	static{
 		KEYS.add("C");
@@ -32,6 +37,11 @@ public class AllNotes {
 		}
 	}
 	
+	/**
+	 * Get the index on a keyboard of the given note according to a String of type [NoteName] [Octave index]
+	 * @param note
+	 * @return
+	 */
 	public static int getIndexOf(String note) {
 		String[] split = note.split(" ");
 		String key = split[0];

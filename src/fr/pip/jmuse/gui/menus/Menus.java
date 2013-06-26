@@ -9,6 +9,11 @@ import javax.swing.JMenuItem;
 
 import fr.pip.jmuse.gui.bundles.JMuseBundle;
 
+/**
+ * Application menus.
+ * @author philippepeter
+ *
+ */
 public class Menus extends JMenuBar{
 	
 	public Menus() {
