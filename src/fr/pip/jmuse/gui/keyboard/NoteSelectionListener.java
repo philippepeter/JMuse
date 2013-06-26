@@ -1,4 +1,4 @@
-package fr.pip.jmuse.graphx.keyboard;
+package fr.pip.jmuse.gui.keyboard;
 
 import fr.pip.jmuse.model.notes.Note;
 

@@ -8,11 +8,16 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import fr.pip.jmuse.graphx.keyboard.KeyboardPanel;
-import fr.pip.jmuse.gui.Menus;
-import fr.pip.jmuse.gui.RythmPanel;
+import fr.pip.jmuse.gui.keyboard.KeyboardPanel;
+import fr.pip.jmuse.gui.menus.Menus;
+import fr.pip.jmuse.gui.rythms.RythmPanel;
 import fr.pip.jmuse.model.Model;
 
+/**
+ * Application class.
+ * @author philippepeter
+ *
+ */
 public class JMuse {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("JMUSE-By-Pip V0.0.1");
@@ -21,7 +26,7 @@ public class JMuse {
 		randomPlayer.open();
 		frame.getContentPane().setLayout(new BorderLayout());
 		Menus menu = new Menus();
-		KeyboardPanel keyboardPanel = new KeyboardPanel(500,300, randomPlayer, model);
+		KeyboardPanel keyboardPanel = new KeyboardPanel(500,300, model);
 		
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();

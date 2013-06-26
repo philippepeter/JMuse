@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.pip.jmuse.gui;
+package fr.pip.jmuse.gui.rythms;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

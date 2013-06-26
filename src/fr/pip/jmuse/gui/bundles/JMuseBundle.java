@@ -1,4 +1,4 @@
-package fr.pip.jmuse.gui;
+package fr.pip.jmuse.gui.bundles;
 
 
 public class JMuseBundle {

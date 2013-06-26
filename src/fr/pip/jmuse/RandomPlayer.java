@@ -9,11 +9,15 @@ import javax.sound.midi.Soundbank;
 import javax.sound.midi.Synthesizer;
 
 import fr.pip.jmuse.model.Model;
-import fr.pip.jmuse.model.NotePlayer;
 
-public class RandomPlayer implements Runnable, NotePlayer {
+/**
+ * Open a defaukt synthetizer and play random notes according to the {@link Model}
+ * @author philippepeter
+ *
+ */
+public class RandomPlayer implements Runnable {
 
-	private Synthesizer synthesizer;
+	private Synthesizer synthetizer;
 	private Instrument[] instruments;
 	private MidiChannel[] midiChannels;
 	private Random random = new Random();
@@ -25,31 +29,34 @@ public class RandomPlayer implements Runnable, NotePlayer {
 	}
 
 	public void open() {
+		// Open a default synthetizer
 		try {
-			if (synthesizer == null) {
-				if ((synthesizer = MidiSystem.getSynthesizer()) == null) {
+			if (synthetizer == null) {
+				if ((synthetizer = MidiSystem.getSynthesizer()) == null) {
 					System.out.println("getSynthesizer() failed!");
 					return;
 				}
 			}
-			synthesizer.open();
+			synthetizer.open();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return;
 		}
 
-		Soundbank sb = synthesizer.getDefaultSoundbank();
+		// Load the first SoundBank
+		Soundbank sb = synthetizer.getDefaultSoundbank();
 		if (sb != null) {
-			instruments = synthesizer.getDefaultSoundbank().getInstruments();
-			synthesizer.loadInstrument(instruments[0]);
+			instruments = synthetizer.getDefaultSoundbank().getInstruments();
+			synthetizer.loadInstrument(instruments[0]);
 		}
-		midiChannels = synthesizer.getChannels();
+		midiChannels = synthetizer.getChannels();
 		new Thread(this).start();
 
 	}
 
 	public void run() {
 		while(true) {
+			// If model is empty stop playing.
 			if(model.isEmpty()) {
 				try {
 					Thread.sleep(500);
@@ -57,6 +64,7 @@ public class RandomPlayer implements Runnable, NotePlayer {
 					e.printStackTrace();
 				}
 			} else {
+				// Play the note.
 				int note = model.getRandomNote(random);
 				int sleep = model.getRandomRythmSleepTime(random);
 				midiChannels[0].noteOn(note, velocity);
@@ -72,38 +80,4 @@ public class RandomPlayer implements Runnable, NotePlayer {
 
 	}
 
-	public void startPlayingNote(final int note, final int velocity) {
-//		new Thread(new Runnable() {
-//
-//			public void run() {
-//				midiChannels[0].noteOn(note, velocity);
-//			}
-//		}).start();
-
-	}
-
-	public void stopPlayingNote(final int note, final int velocity) {
-//		new Thread(new Runnable() {
-//
-//			public void run() {
-//				midiChannels[0].noteOff(note, velocity);
-//			}
-//		}).start();
-
-	}
-
-	public void playNote(final int note, final int velocity) {
-//		new Thread(new Runnable() {
-//
-//			public void run() {
-//				midiChannels[0].noteOn(note, velocity);
-//				try {
-//					Thread.sleep(500);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//				midiChannels[0].noteOff(note, velocity);
-//			}
-//		}).start();
-	}
 }

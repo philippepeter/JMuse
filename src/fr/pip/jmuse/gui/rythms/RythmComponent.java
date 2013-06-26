@@ -1,4 +1,4 @@
-package fr.pip.jmuse.gui;
+package fr.pip.jmuse.gui.rythms;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

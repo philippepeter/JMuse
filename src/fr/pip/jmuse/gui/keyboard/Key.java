@@ -1,4 +1,4 @@
-package fr.pip.jmuse.graphx.keyboard;
+package fr.pip.jmuse.gui.keyboard;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,11 +10,17 @@ import java.awt.geom.Ellipse2D;
 import fr.pip.jmuse.model.Model;
 import fr.pip.jmuse.model.notes.Note;
 
+/**
+ * Draw a key of the {@link KeyboardPanel} with is probability level.
+ * @author philippepeter
+ *
+ */
 public class Key {
 
 	public final static int WIDTH = 20;
 	public final static int HEIGHT = 150;
 	
+	// Colors for probability levels.
 	private final static Color colorLevel1 = new Color(254,6,0);
 	private final static Color colorLevel2 = new Color(254,139,0);
 	private final static Color colorLevel3 = new Color(254,244,2);
@@ -102,7 +108,6 @@ public class Key {
 		}
 		else if(note.getKey() == 7) {
 			int x1=x+littleDelta;
-			int x2=x+WIDTH-littleDelta; 
 			int[] xPoints = {x, x, x1, x1, x+blackWidth,x+blackWidth,x+WIDTH,x+WIDTH};
 			int y1 = y-HEIGHT+blackHeight;
 			int y2 = y-HEIGHT;
@@ -113,7 +118,8 @@ public class Key {
 			g.setColor(bcolor);
 			g.draw(shape);
 		}
-		
+
+		// Draw the probability circles.
 		drawCircles(x,y-HEIGHT,g);
 	}
 
@@ -124,8 +130,6 @@ public class Key {
 		drawCircle(colorLevel3, x, y-20, g, level > 2);
 		drawCircle(colorLevel4, x, y-30, g, level > 3);
 		drawCircle(colorLevel5, x, y-40, g, level > 4);
-		
-		
 	}
 
 	private void drawlabel(int x, int y, Graphics2D g) {
@@ -177,16 +181,6 @@ public class Key {
 		return true;
 	}
 
-//	public void drawMinCircle(int x, int y, Graphics2D g) {
-//		drawCircle(Color.RED, x, y, g);
-//	}
-//
-//	
-//
-//	public void drawMaxCircle(int x, int y, Graphics2D g) {
-//		drawCircle(Color.BLUE, x, y, g);
-//	}
-	
 	private void drawCircle(Color color, int x, int y, Graphics2D g, boolean fill) {
 		if(note.isSharp()) {
 			
