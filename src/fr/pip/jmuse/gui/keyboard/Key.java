@@ -28,6 +28,8 @@ public class Key {
 	private final static Color colorLevel4 = new Color(166, 254, 2);
 	private final static Color colorLevel5 = new Color(6, 254, 0);
 
+	private final static Color colorForWhiteKey = new Color(230,230,230);
+	
 	private Note note;
 	private int blackWidth;
 	private int blackHeight;
@@ -53,7 +55,7 @@ public class Key {
 		g.setColor(Color.BLACK);
 		y = y + HEIGHT;
 		Color bcolor = Color.BLACK;
-		Color wcolor = Color.WHITE;
+		Color wcolor = colorForWhiteKey;
 		if (rollOvered) {
 			bcolor = Color.LIGHT_GRAY;
 			wcolor = Color.LIGHT_GRAY;
