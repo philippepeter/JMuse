@@ -5,12 +5,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import fr.pip.jmuse.gui.keyboard.KeyboardPanel;
 import fr.pip.jmuse.gui.menus.Menus;
-import fr.pip.jmuse.gui.rythms.RythmPanel;
+import fr.pip.jmuse.gui.rythms.RhythmPanel;
 import fr.pip.jmuse.model.Model;
 
 /**
@@ -39,8 +38,8 @@ public class JMuse {
 		constraints.weighty = 1;
 		
 		constraints.gridheight = 2;
-		panel.add(new RythmPanel(model), constraints);
-		constraints.weightx = 3;
+        panel.add(new RhythmPanel(model), constraints);
+        constraints.weightx = 3;
 		constraints.gridheight = 1;
 		constraints.gridx++;
 		panel.add(keyboardPanel, constraints);
@@ -48,10 +47,10 @@ public class JMuse {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		int width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-		frame.setBounds(width/2-400, height/2-150, 800, 300);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
-	}
+        frame.setBounds(width / 2 - 400, height / 2 - 150, 800, 300);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
+    }
 }

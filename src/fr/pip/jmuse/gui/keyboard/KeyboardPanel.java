@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Vector;
 
@@ -26,25 +25,23 @@ import fr.pip.jmuse.model.notes.Note;
 public class KeyboardPanel extends JScrollPane {
 
 	private Vector<Key> keys = new Vector<Key>();
-	private int panelHeight;
-	private int panelWidth;
-	private JPanel panel;
-	private Key selectedKey = null;
-	private boolean dragg;
+    private JPanel panel;
+    private Key selectedKey = null;
+    private boolean dragg;
 
-	public KeyboardPanel(int width, int height, Model model) {
+    public KeyboardPanel(int width, int height, Model model) {
 		// Creates all notes.
 		for (Note note : AllNotes.NOTES) {
 			keys.add(new Key(note, model));
 		}
 
 		// Compute size.
-		this.panelWidth = (keys.size() / 12 + 1) * 7 * Key.WIDTH + 40;
-		this.panelHeight = height + 40;
+        int panelWidth = (keys.size() / 12 + 1) * 7 * Key.WIDTH + 40;
+        int panelHeight = height + 40;
 
-		// Creates the canvas to draw.
-		panel = new JPanel() {
-			@Override
+        // Creates the canvas to draw.
+        panel = new JPanel() {
+            @Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				draw((Graphics2D) g);
@@ -136,8 +133,8 @@ public class KeyboardPanel extends JScrollPane {
 			if (!key.isSharp()) {
 				x += Key.WIDTH;
 			}
-			key.draw(x, 20, (Graphics2D) g);
-		}
-	}
+            key.draw(x, 20, g);
+        }
+    }
 
 }
